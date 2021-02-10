@@ -1,0 +1,6 @@
+# design-and-uml-voice-message-system-gander392
+This is a set of UML diagrams and tools for building a company-wide phone voice messaging system. There is a use-case diagram, a data dictionary, a list of scenarios 
+for accessing a mailbox, retrieving a message, deleting a message, and leaving a message, sequence diagrams for those scenarios, and a class diagram. The UML 
+diagrams were built using an existing phone system API and customer-provided specifications. The use-case diagram lists all the use cases that can be performed
+between the mail system, which contains mailboxes, and the three user types of caller, owner, and administrator. The data dictionary lists and explains all the
+necessary components of the message system. The class diagram includes all of the classes required for the message system and details the relationships between them.
