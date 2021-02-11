@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0059)http://www.cs.kent.edu/~jmaletic/cs33901/UMLassignment.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="Author" content="Jonathan I. Maletic, Ph.D.">
+  <title>UML Assignment</title>
+</head>
+<body>
+
+<hr>
+<div style="text-align: left;"> 
+<font face="Helvetica, Arial, sans-serif"> <b><font size="+3">
+CS 33901 Software Engineering<br>
+<font size="+2">
+Assignment 1 - Design in UML <br>
+</font></font></b> 
+</font></div><font face="Helvetica, Arial, sans-serif">
+<hr>
+
+<font style="font-family: helvetica,arial,sans-serif;" face="Helvetica, Arial, sans-serif">
+<font size="+2">
+<br>
+
+<b>
+Design Assignment using UML - Simple Voice Messaging System <br>
+</b>
+<br> 
+
+This system is a simple phone voice messaging system.  It acts as an answering service for an organization wide phone system.  
+You are to construct the software for the message system only and can assume that the hardware for the phone system, dialing, 
+and message recording are in place.  <br> <br> 
+
+The interface to the Phone System is given below; you will be building this message system
+as an add-on to the Phone System and must use this API.
+
+<pre> <code>
+PhoneSystem
+    Pickup       ()                   //Initiates one end of a connection
+    Hangup       ()                   //Ends a connection
+    dial         (char)               //Allows dialing of '0'..'9', '#', '*'
+    ring         ()                   //Sends a ring to the reciever in connection
+    play         (message)            //Play message
+    connection   ()        : Boolean  //True if a connection exists
+    record       (int)     : message  //Record a message until hangup() or time
+                                      //limit (seconds) is reached
+    getRingCount ()        : int      //Returns the number of rings
+    getDial      ()        : char     //Returns the character dialed (buffered)
+                                      //returns 0 if buffer is empty
+                                      //returns -1 if a hangup occurs
+    getExtension ()        : string   //Returns the current extension
+</code> </pre>
+
+
+A connection (object) is activated after n (e.g., 4) number of rings without a pickup (answer) from the account owner.
+Each account is indexed by a unique extension that is determined by the phone system.  Some numbers belong to active
+extensions; others do not.  If an inactive extension account has been dialed, an error message is generated
+telling the caller then the message system reverts to its initial state.  If an active account has been reached,
+the account's greeting is played.  Unless changed by the owner, the greeting is:<br><br>
+
+"You have reached extension xxxx. <br>
+If you would like to leave a message press 1<br>
+If you would like to access an account press #". <br>
+
+<br><br>
+
+At this point, the caller can record a message by talking.  The message is ended with a hang up or a timeout in number of 
+seconds.  Alternatively, callers can press the "#" key to access their own account from a phone and enter in the proper
+extension and password.  An owner can also dial "8888" from their own phone and just enter their password to access their 
+account. <br><br>
+
+The phone system interface allows access for the caller and the message system.  When a pickup is done and dial tone is 
+set and a connection is initiated.  The caller can then dial an extension and system will ring an extension until someone 
+does a pickup at the other end or the caller hangs up.  Connection will be true so long a hangup is not executed.  The 
+Phone System manages all other aspects of the connections, message recording, and message playback.  All characters dialed 
+are buffered in a queue which is accessed via getDial.  All interface calls are blocking and as such the message system will 
+wait until the interface call has completed execution and a value returned.<br><br>
+
+An administration account exists and has extended functionality to manage the message system.  The admin account can add or remove
+a accounts and set a user's password.<br><br>
+
+The following are a subset of the system menu options:<br><br>
+
+<b>Accessing an Account</b><br>
+
+To restrict access to an account to its owner, the system prompts for a password.
+After the account owner has entered the correct password, it is possible to retrieve messages
+from the account or to change account settings.  The user options menu is:<br><br>
+
+Press 1 to retrieve your messages.<br>
+Press 2 to change your greeting.<br>
+Press 3 to change your password.<br>
+
+<br>
+<b>Retrieving Messages</b><br>
+
+The first message is displayed.  Then the message options menu is:<br>
+Press 1 to play the current message.<br>
+Press 2 to delete the current message.<br>
+Press 3 to skip the current message.<br>
+<br>
+After the selection is processed, the next message is played or an acknowledgement of the action is given.  
+This repeats until all messages are played.  Then the user options menu is repeated.  At any time, the caller may 
+hang up.  New messages are played in the order in which they were received.  After all new messages are played, 
+the saved messages are played in the order in which they are saved.<br><br>
+
+<b>Assignment (using a UML tool of your choice)</b>:
+<ul style="margin-top: 0in">
+  <li>Develop Use-Case diagram(s) for the specified system</li>
+  <li>Develop a data dictionary and initial object diagram for the system</li>
+  <li>Develop detailed scenarios for:</li>
+     <ul style="margin-top: 0in">
+     <li>accessing an account</li>
+     <li>retrieving a message</li>
+     <li>deleting a message</li>
+     <li>leaving a message</li>
+     </ul>
+  <li>Develop detailed sequence diagrams for each of the scenarios above. </li>
+  <li>Develop a detailed class diagram that describes the necessary design elements for this part of the system.</li>
+  <li>The design must reflect that the system will need to be multi-threaded to support multiple simultaneous users.</li>
+  <li>Submit (in GitHub Classroom) the following documents for the message system:</li>
+     <ul style="margin-top: 0in">
+     <li>Use case diagrams (using a UML tool)</li>
+     <li>Data dictionary (neatly typed up)</li>
+     <li>Scenarios for the 4 features (neatly typed up)</li>
+     <li>Sequence diagrams for the 4 features (using a UML tool)</li>
+     <li>Class diagram (using a UML tool)</li>
+     </ul>
+</ul>
+
+<br>
+
+<b>Some UML Tools are listed under <a href="http://www.cs.kent.edu/~jmaletic/cs33901/resources.html">resources</a></b><br>
+
+</font>
+<hr>
+<address>
+URL:http://www.cs.kent.edu/~jmaletic/cs33901/UMLassignment.html <br>
+Last update: Mon Sep 21 12:23:28 2020 EST
+</address>
+<hr>
+
+
+</font></font></body></html>
